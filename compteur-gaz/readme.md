@@ -32,6 +32,19 @@ Pour ma part, j'utiliser Node-Red et Home Assistant, j'ai donc créé un compteu
 [{"id":"786821d1b18fd216","type":"server-state-changed","z":"106cf0db58f8d53d","name":"Impulsion Gaz","server":"af11678a.3c0e98","version":4,"exposeToHomeAssistant":false,"haConfig":[{"property":"name","value":""},{"property":"icon","value":""}],"entityidfilter":"sensor.impulsion_gaz_action","entityidfiltertype":"exact","outputinitially":false,"state_type":"str","haltifstate":"\"\"","halt_if_type":"jsonata","halt_if_compare":"is_not","outputs":2,"output_only_on_state_change":true,"for":"0","forType":"num","forUnits":"minutes","ignorePrevStateNull":false,"ignorePrevStateUnknown":false,"ignorePrevStateUnavailable":false,"ignoreCurrentStateUnknown":false,"ignoreCurrentStateUnavailable":false,"outputProperties":[{"property":"payload","propertyType":"msg","value":"","valueType":"entityState"},{"property":"data","propertyType":"msg","value":"","valueType":"eventData"},{"property":"topic","propertyType":"msg","value":"","valueType":"triggerId"}],"x":170,"y":680,"wires":[["6efe4b92bbcc494c"],[]]},{"id":"6efe4b92bbcc494c","type":"api-call-service","z":"106cf0db58f8d53d","name":"Increment Gaz","server":"af11678a.3c0e98","version":5,"debugenabled":false,"domain":"counter","service":"increment","areaId":[],"deviceId":[],"entityId":["counter.compteur_gaz"],"data":"","dataType":"jsonata","mergeContext":"","mustacheAltTags":false,"outputProperties":[],"queue":"none","x":440,"y":680,"wires":[[]]},{"id":"af11678a.3c0e98","type":"server","name":"Home Assistant","version":2,"addon":true,"rejectUnauthorizedCerts":true,"ha_boolean":"y|yes|true|on|home|open","connectionDelay":true,"cacheJson":true,"heartbeat":false,"heartbeatInterval":30}]
 ```
 
+#### La petite astuce :)
+Le compteur est incrémenté de 1, unité minimale dans un compteur, mais on veut incrémenter de 0.01 m3. J'ai donc créé un sensor de type template, qui va multiplier la valeur du compteur par 0.01 pour avoir la consommation en m3.
+
+```yaml
+- name: Consommation Gaz Totale
+  unique_id: gaz_total_consumption
+  state_class: total_increasing
+  device_class: gas
+  unit_of_measurement: m³
+  state: >
+    {{ states('counter.compteur_gaz') | float / 100  | round(2) }}
+```
+
 # Résultat
 Et tadaaaaaaaaaaaaaaaaaaaaaaa, c'est tout :)
 
