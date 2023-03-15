@@ -24,7 +24,7 @@ Peu importe la box domotique que vous utilisez, le principe est toujours le mêm
 Sur mon compteur, un tour de la dernière roue correspond à 0.01 m3 de gaz consommé. Il faut donc d'additionner 0.01 m3 à chaque impulsion reçue pour avoir la consommation en m3.
 
 ### Version Home Assistant - Node Red
-Pour ma part, j'utiliser Node-Red et Home Assistant, j'ai donc créé un compteur dans les Helpers de Home Assistant et j'ai créé un flow Node-Red qui récupère les impulsions et qui ajoute 0.01 m3 à chaque impulsion reçue via l'appel du service `counter.increment` de Home Assistant.
+Pour ma part, j'utilise Node-Red et Home Assistant, j'ai donc créé un compteur dans les Helpers de Home Assistant et j'ai créé un flow Node-Red qui récupère les impulsions et qui ajoute 0.01 m3 à chaque impulsion reçue via l'appel du service `counter.increment` de Home Assistant.
 
 ![Node-Red](./images/03-node-red.jpg)
 
