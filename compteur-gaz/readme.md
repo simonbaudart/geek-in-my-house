@@ -11,7 +11,9 @@ Le cablage au niveau du compteur est très simple, il suffit de brancher le fil 
 ## Etape 2 : Le bouton poussoir
 Pour récupérer les impulsions, il y a plusieurs solutions, mais la plus "simple" est d'utiliser un bouton poussoir. Dans mon cas, je suis en ZigBee et j'ai donc utilisé le bouton poussoir [Sonoff SNZB-01](https://www.zigbee2mqtt.io/devices/SNZB-01.html) qui permet de récupérer les impulsions.
 
-Je l'ai ouvert complètement et j'ai été rechercher les deux points de soudure qui permettent d'ajouter deux fils en parallèle avec le bouton. (photo à venir). J'en ai profité pour forer un trou dans le dessus du bouton pour pouvoir y passer les fils. Là aussi, il n'y a pas de couleur, il suffit de brancher les fils sur les deux points de soudure.
+Je l'ai ouvert complètement et j'ai été rechercher les deux points de soudure qui permettent d'ajouter deux fils en parallèle avec le bouton. J'en ai profité pour forer un trou dans le dessus du bouton pour pouvoir y passer les fils. Là aussi, il n'y a pas de couleur, il suffit de brancher les fils sur les deux points de soudure.
+
+![Bouton Poussoir - Soudure](./images/05-soudure-contact.jpg)
 
 ### Cablage
 Une fois les deux fils branchés, il suffit de les connecter au capteur d'impulsion. Je ne vais pas vous refaire la blague, de nouveau, il n'y a pas de couleur :)
@@ -49,3 +51,34 @@ Le compteur est incrémenté de 1, unité minimale dans un compteur, mais on veu
 Et tadaaaaaaaaaaaaaaaaaaaaaaa, c'est tout :)
 
 ![Historique)](./images/04-historique.jpg)
+
+# Le petit plus : le up de batterie
+
+Bon, ce bouton poussoir c'est une pile CR2450 qui n'est pas la moins chère du monde. J'ai donc décidé de faire un petit up de batterie pour pouvoir le recharger via un chargeur USB :)
+
+## Quelle batterie ?
+J'ai décidé de choisir une batterie [LiPo 3.7v 2000mAh](https://amzn.to/3NdkMv9) et de commande un [petit module USB-C](https://amzn.to/445z72Q) qui va bien pour la recharger.
+
+## Le montage, c'est parti !
+Bon, allez, on est reparti pour souder des fils :)
+
+C'est un peu plus touchy parce que la masse est au même endroit qu'un des fils de contacts, mais ça se fait !
+L'autre fil est soudé sur une petite borne reliée au + de la pile.
+Ca donne ceci (pas de critique sur mes soudures :), j'ai utilisé des connecteurs [JST-PH 2.0](https://amzn.to/41T5LU9) comme sur la batterie pour pouvoir la changer facilement.
+
+![Batterie](./images/06-soudure-batterie.jpg)
+
+## Le chargeur de batterie
+C'est tout à fait utilisable en connectant la batterie au JST mais j'ai préféré mettre en parallele un chargeur USB-C pour pouvoir le recharger sans avoir à retirer la batterie, j'ai une prise pas loin.
+
+La connection se fait en soudant les fils qui vont vers le bouton poussoir sur les connecteurs extérieurs du chargeur et les fils vers la batterie sur les connecteurs intérieurs. **Attention, il faut bien respecter le sens des fils, le + de la batterie doit être relié au + du chargeur et la masse de la batterie au - du chargeur.**
+
+![Chargeur](./images/07-soudure-chargeur.jpg)
+
+On vérifie au multimètre que tout est bien branché comme il faut et on met en charge, c'est parti !
+Et quand on a vérifié que tout fonctionne, on cale tout dans la boite de dérivation et on remonte le tout sur le capteur du compteur.
+
+*J'ai quand même mis une diode entre sur le positif, pour éviter les inversions de polarité et dropper de 0.7V car la batterie est à 3.7V (4.2 en charge) alors que la pile est à 3V. A priori, le bouton poussoir le tolère :)*
+
+![Tout fonctionne !](./images/08-tout-fonctionne.jpg)
+![Dans la boite !](./images/09-dans-la-boite.jpg)
